@@ -1,0 +1,43 @@
+
+<div *ngIf="countries.length === 0; else table" class="alert alert-warning text-center">
+    No hay paises que mostrar
+</div>
+
+
+<ng-template #table>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>icon</th>
+                <th>Bandera</th>
+                <th>Nombre</th>
+                <th>Capital</th>
+                <th>Poblacion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of countries; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ c.flag }}</td>
+                <td><img [src]="c.flags.png" [alt]="c.flags.alt"></td>
+                <td>{{ c.name.common }}</td>
+                <td>{{ c.capital }}</td>
+                <td>{{ c.population | number }}</td>
+                <!-- CON INTERPOLACION  -->
+                <!-- <td><a routerLink="{{ '/countries/by/' + c.cca3 }}" href="">Info</a></td>   -->
+
+                <!-- con concatenacion de strings -->
+                <td><a [routerLink]="'/countries/by/' + c.cca3 " href="">Info</a></td>
+                
+                <!-- cuando es routerLink entre [] se puede crear un array para agregar la ruta -->
+                <!-- <td><a [routerLink]="['/countries/by/', c.cca3 ]" href="">Info</a></td> -->
+            </tr>
+        </tbody>
+    
+    
+    </table>
+
+</ng-template>
